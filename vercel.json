@@ -1,9 +1,8 @@
 {
-  "routes": [
-    {
-      "src": "/api/webhook",
-      "methods": ["POST"],
-      "dest": "/api/webhook.ts"
+  "version": 2,
+  "functions": {
+    "api/webhook.ts": {
+      "runtime": "vercel-node@3"
     }
-  ]
+  }
 }

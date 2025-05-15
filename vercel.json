@@ -3,5 +3,11 @@
     "api/webhook.ts": {
       "runtime": "nodejs18.x"
     }
-  }
+  },
+  "builds": [
+    {
+      "src": "api/webhook.ts",
+      "use": "@vercel/node"
+    }
+  ]
 }

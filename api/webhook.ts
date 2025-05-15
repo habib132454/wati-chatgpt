@@ -3,8 +3,9 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY!;
 const WATI_API_KEY = process.env.WATI_API_KEY!;
-const WATI_API_URL = process.env.WATI_API_URL || "https://live-mt-server.wati.io/api/v1/sendSessionMessage";
-const OPENAI_ENDPOINT = "https://api.openai.com/v1/chat/completions";
+const WATI_API_URL = process.env.WATI_API_URL!;
+
+const openaiEndpoint = "https://api.openai.com/v1/chat/completions";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
@@ -17,7 +18,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const gptRes = await axios.post(
-      OPENAI_ENDPOINT,
+      openaiEndpoint,
       {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user", content: userMessage }]
@@ -31,7 +32,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     );
 
     const gptReply = gptRes.data.choices[0]?.message?.content?.trim();
-    if (!gptReply) throw new Error("GPT 응답 없음");
+
+    if (!gptReply) {
+      throw new Error("GPT 응답 없음");
+    }
 
     await axios.post(
       WATI_API_URL,
@@ -48,7 +52,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     );
 
     return res.status(200).json({ success: true });
-
   } catch (error: any) {
     console.error("에러 발생:", error?.response?.data || error.message);
 

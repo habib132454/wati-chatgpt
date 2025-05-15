@@ -1,9 +1,7 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/webhook.ts",
-      "use": "@vercel/node"
+  "functions": {
+    "api/webhook.ts": {
+      "runtime": "vercel/node@18.0.0"
     }
-  ]
+  }
 }

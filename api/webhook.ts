@@ -5,7 +5,7 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY!;
 const WATI_API_KEY = process.env.WATI_API_KEY!;
 
 const openaiEndpoint = "https://api.openai.com/v1/chat/completions";
-const watiEndpoint = "https://live-mt-server.wati.io/api/v1/sendSessionMessage";
+const watiEndpoint = "https://live-mt-server.wati.io/101924/api/v1/sendSessionMessage";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
